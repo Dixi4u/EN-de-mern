@@ -2,10 +2,10 @@
 import mongoose, { connect } from "mongoose";
 import{config} from "./src/config.js";
 
-mongoose.connect(config.MONGO_URI);
+
 
 //conecto la base de datos
-mongoose.connect(config.MONGO_URI);
+mongoose.connect(config.db.URI);
 
 
 //Creo una constante 

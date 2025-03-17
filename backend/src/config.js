@@ -1,4 +1,13 @@
+import dotenv from "dotenv";
+
+//Ejecutar la libreria dotenv para acceder al archivo .env
+dotenv.config();
+
 export const config = {
-    PORT:4000,
-    MONGO_URI: "mongodb://127.0.0.1:27017/zgasdb"
+    db: {
+        URI: process.env.DB_URI,
+    },
+    server: {
+        port: process.env.PORT,
+    }
 }
