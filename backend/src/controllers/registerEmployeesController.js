@@ -6,19 +6,7 @@ import { config } from "../config.js";
 const registerEmployeesController = {};
 
 registerEmployeesController.register = async (req, res) => {
-  const {
-    name,
-    lastName,
-    birthday,
-    email,
-    address,
-    hireDate,
-    password,
-    telephone,
-    dui,
-    isssNumber,
-    isVerified,
-  } = req.body;
+  const { name, lastName, birthday, email, address, hireDate, password, telephone, dui, isssNumber, isVerified } = req.body;
 
   try {
     //Verificamos si el empleado ya existe
@@ -31,19 +19,7 @@ registerEmployeesController.register = async (req, res) => {
     const passwordHash = await bcryptjs.hash(password, 10);
 
     //Guardamos el empleado nuevo
-    const newEmployee = new employeeModel({
-      name,
-      lastName,
-      birthday,
-      email,
-      address,
-      hireDate,
-      password: passwordHash,
-      telephone,
-      dui,
-      isssNumber,
-      isVerified,
-    });
+    const newEmployee = new employeeModel({ name, lastName, birthday, email, address, hireDate, password: passwordHash, telephone, dui, isssNumber, isVerified });
 
     await newEmployee.save()
 
@@ -56,15 +32,16 @@ registerEmployeesController.register = async (req, res) => {
         //3-Cuando expira
         {expiresIn: config.JWT.expiresIn},
         //4-Funcion flecha
-        (error, token) =>{
-            if(error) console.log(error)
-                res.cookie("authToken", token)
+        (error, token)=>{
+            if(error) console.log(error);
+            res.cookie("authToken", token);
+            res.json({message: "se inserto esta babosada"});
         }
     )
 
 
   } catch (error) {
-
+    console.log(error)
   }
 };
 
