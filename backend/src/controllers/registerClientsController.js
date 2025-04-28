@@ -86,7 +86,7 @@ registerClientsController.register = async (req, res) => {
             <p>Hola,</p>
             <p>Gracias por registrarte en nuestra plataforma. Para completar tu registro, por favor verifica tu correo electrónico haciendo clic en el botón de abajo:</p>
             <div style="text-align: center; margin: 20px 0;">
-              <a href="https://example.com/verify?email=${email}" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">Verificar correo</a>
+              <a href="https://example.com/verify?email=${email}" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">${verificationcode}</a>
             </div>
             <p>Si no solicitaste este correo, puedes ignorarlo. Tu cuenta no será activada hasta que verifiques tu correo electrónico.</p>
             <p>Si tienes algún problema, no dudes en contactarnos respondiendo a este correo.</p>
