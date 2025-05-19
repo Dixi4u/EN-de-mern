@@ -12,6 +12,7 @@ import logoutRoute from "./src/routes/logout.js";
 import registerClients from "./src/routes/registerClients.js";
 import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 import blogRoutes from "./src/routes/blog.js"
+import { validateAuthToken } from "./src/middlewares/validateAuthToken.js";
 
 //Creo una constante que es igual a la libreria que acabo de importar, y la ejecuto
 
@@ -19,11 +20,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/products", productRoutes);
+app.use("/api/products", validateAuthToken(["employee", "admin"]), productRoutes);
 app.use("/api/clients", clientsRoutes);
 app.use("/api/employees", employeesRoutes);
 app.use("/api/branches", branchesRoutes);
-app.use("/api/reviews", reviewsRoutes);
+app.use("/api/reviews",  validateAuthToken(["employee"]), reviewsRoutes);
 app.use("/api/registerEmployee", registerRoutes)
 app.use("/api/login", loginRoute)
 app.use("/api/logout", logoutRoute)
