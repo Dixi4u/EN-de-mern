@@ -1,0 +1,129 @@
+import React from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate, NavLink } from "react-router-dom";
+
+const NavBar = () => {
+  const navigate = useNavigate();
+  const { logout, authCokie } = useAuth();
+  const handleLogout = () => {
+    logout(async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/logout', {
+          method: 'POST',
+          credentials: 'include',
+      })
+      alert("Sesión cerrada");
+      } catch (error) {
+        alert("Error al cerrar sesión"), error;
+        console.error("Error al cerrar sesión:", error);
+      }
+    });
+    navigate("/");
+  };
+
+  // Si no hay sesión, no mostrar el NavBar
+  if (!authCokie) return null;
+
+  return (
+    <nav
+      className="shadow"
+      style={{
+        background: "linear-gradient(120deg, #232526 0%, #0f2027 100%)",
+        borderBottom: "1px solid #00fff7",
+        boxShadow: "0 2px 16px 0 rgba(0,255,247,0.08)",
+      }}
+    >
+      <div className="container mx-auto px-4 py-3 d-flex justify-content-between align-items-center">
+        <div className="fs-4 fw-bold" style={{ color: "#00fff7", textShadow: "0 0 8px #00fff7" }}>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "text-decoration-none fw-bold"
+                : "text-decoration-none"
+            }
+            style={({ isActive }) => ({
+              color: isActive ? "#00fff7" : "#b0b0b0",
+              textShadow: isActive ? "0 0 10px #00fff7" : "none",
+              letterSpacing: "2px",
+            })}
+          >
+            ByteShop
+          </NavLink>
+        </div>
+        <ul className="d-flex gap-4 mb-0" style={{ listStyle: "none" }}>
+          <li>
+            <NavLink
+              to="/models"
+              className="text-decoration-none"
+              style={({ isActive }) => ({
+                color: isActive ? "#00fff7" : "#b0b0b0",
+                fontWeight: isActive ? "bold" : "normal",
+                textShadow: isActive ? "0 0 8px #00fff7" : "none",
+                transition: "color 0.2s",
+                letterSpacing: "1px",
+              })}
+            >
+              Modelos
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/brands"
+              className="text-decoration-none"
+              style={({ isActive }) => ({
+                color: isActive ? "#00fff7" : "#b0b0b0",
+                fontWeight: isActive ? "bold" : "normal",
+                textShadow: isActive ? "0 0 8px #00fff7" : "none",
+                transition: "color 0.2s",
+                letterSpacing: "1px",
+              })}
+            >
+              Marcas
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/employees"
+              className="text-decoration-none"
+              style={({ isActive }) => ({
+                color: isActive ? "#00fff7" : "#b0b0b0",
+                fontWeight: isActive ? "bold" : "normal",
+                textShadow: isActive ? "0 0 8px #00fff7" : "none",
+                transition: "color 0.2s",
+                letterSpacing: "1px",
+              })}
+            >
+              Empleados
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/categories"
+              className="text-decoration-none"
+              style={({ isActive }) => ({
+                color: isActive ? "#00fff7" : "#b0b0b0",
+                fontWeight: isActive ? "bold" : "normal",
+                textShadow: isActive ? "0 0 8px #00fff7" : "none",
+                transition: "color 0.2s",
+                letterSpacing: "1px",
+              })}
+            >
+              Categorías
+            </NavLink>
+          </li>
+        </ul>
+        <div>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={logout} // o la función que uses
+          >
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;

@@ -116,34 +116,45 @@ registerClientsController.register = async (req, res) => {
 };
 
 registerClientsController.verifyCodeEmail = async (req, res) => {
-  const { requireCode } = req.body;
-
-  const token = req.cookies.verificationToken;
+  const { requireCode } = req.body; // Código ingresado por el usuario
+  const token = req.cookies.verificationToken; // Token almacenado en cookies
 
   try {
-    //Verificar y decodificar el token
-    const decoded = jsonwebtoken.verify(token, config.JWT.secret);
-    const { email, verificationCode: storedCode } = decoded;
-
-    //Comparar el codigo que envie por correo y esta guardado en las cookies, con el codigo que el usuario esta ingresando
-    if (requireCode !== storedCode) {
-      return res.json({ message: "Invalid code" });
+    // Verificar si el token existe
+    if (!token) {
+      return res.status(400).json({ message: "Token no proporcionado" });
     }
 
-    //Marcamos al cliente como verificado
-    const client = await clientsModel.findOne({email});
+    // Verificar y decodificar el token
+    const decoded = jsonwebtoken.verify(token, config.JWT.secret);
+    const { email, verificationCode: storedCode } = decoded; // Extraer email y código del token
+
+    // Validar que requireCode y storedCode existan
+    if (!requireCode || !storedCode) {
+      return res.status(400).json({ message: "Código no proporcionado o inválido" });
+    }
+
+    // Comparar el código ingresado con el código almacenado (ignorar mayúsculas/minúsculas)
+    if (requireCode.trim().toLowerCase() !== storedCode.trim().toLowerCase()) {
+      return res.status(400).json({ message: "Invalid code" });
+    }
+
+    // Marcar al cliente como verificado
+    const client = await clientsModel.findOne({ email });
+    if (!client) {
+      return res.status(404).json({ message: "Cliente no encontrado" });
+    }
+
     client.isVerified = true;
-    await client.save();                                 
+    await client.save();
 
-
+    // Limpiar la cookie del token
     res.clearCookie("verificationToken");
 
-    res.json({message: "Email verified Successfully"});
-
-
-
+    res.json({ message: "Email verified successfully" });
   } catch (error) {
-    console.log("error"+error);
+    console.error("Error al verificar el código:", error);
+    res.status(500).json({ message: "Error del servidor" });
   }
 };
 
