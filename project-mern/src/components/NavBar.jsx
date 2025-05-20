@@ -1,26 +1,25 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 
 const NavBar = () => {
-  const navigate = useNavigate();
-  const { logout, authCokie } = useAuth();
-  const handleLogout = () => {
-    logout(async () => {
-      try {
-        const response = await fetch('http://localhost:4000/api/logout', {
-          method: 'POST',
-          credentials: 'include',
-      })
-      alert("Sesión cerrada");
-      } catch (error) {
-        alert("Error al cerrar sesión"), error;
-        console.error("Error al cerrar sesión:", error);
-      }
-    });
-    navigate("/");
-  };
-
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { logout, authCokie } = useAuth();
+ 
+    const isActive = (path) => {
+        return location.pathname.includes(path);
+    };
+ 
+    const handleLogout = async () => {
+        await fetch('http://localhost:4000/api/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        logout();
+        navigate('/');
+    };
+ 
   // Si no hay sesión, no mostrar el NavBar
   if (!authCokie) return null;
 
@@ -34,13 +33,14 @@ const NavBar = () => {
       }}
     >
       <div className="container mx-auto px-4 py-3 d-flex justify-content-between align-items-center">
-        <div className="fs-4 fw-bold" style={{ color: "#00fff7", textShadow: "0 0 8px #00fff7" }}>
+        <div
+          className="fs-4 fw-bold"
+          style={{ color: "#00fff7", textShadow: "0 0 8px #00fff7" }}
+        >
           <NavLink
             to="/dashboard"
             className={({ isActive }) =>
-              isActive
-                ? "text-decoration-none fw-bold"
-                : "text-decoration-none"
+              isActive ? "text-decoration-none fw-bold" : "text-decoration-none"
             }
             style={({ isActive }) => ({
               color: isActive ? "#00fff7" : "#b0b0b0",
@@ -116,7 +116,7 @@ const NavBar = () => {
         <div>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={logout} // o la función que uses
+            onClick={handleLogout} // o la función que uses
           >
             Cerrar Sesión
           </button>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import {
   BrowserRouter as Router,
@@ -6,6 +6,7 @@ import {
   Routes,
   Navigate,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
@@ -18,28 +19,44 @@ import { PrivateRoute } from "./PrivateRoute";
 import { useAuth } from "../context/AuthContext";
 
 function Navegation() {
-  //en el frontned manejo la autenticacion con cookie osea obtengo lo que 
-  //devuelve el backend y lo guardo en una cookie
-  //y en el frontend lo guardo en el contexto
+  const location = useLocation();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
+  const authRoutes = ['/login', '/register', '/recuperacion', '/recuperacioncodigo', '/cambiarpassword'];
+
   const { authCokie } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authCokie) {
-      navigate("/dashboard");
+    const currentPath = location.pathname.toLowerCase().replace(/\/$/, '');
+    const shouldHideNavbar = authRoutes.some(route => 
+      currentPath === route || currentPath.startsWith(route + '/')
+    );
+    const shouldHideFooter = authRoutes.some(route => 
+      currentPath === route || currentPath.startsWith(route + '/')
+    );
+    setShowNavbar(!shouldHideNavbar);
+    setShowFooter(!shouldHideFooter);
+  }, [location.pathname]);
+
+
+
+  useEffect(() => {
+    const publicRoutes = ['/login', '/register', '/recuperacion', '/recuperacioncodigo', '/cambiarpassword'];
+    const currentPath = location.pathname.toLowerCase().replace(/\/$/, '');
+    if (authCokie && publicRoutes.includes(currentPath)) {
+      navigate("/employees");
     }
-  }, [authCokie]);
+  }, [authCokie, navigate, location.pathname]);
 
   return (
     <>
-      <NavBar />
+      {showNavbar && authCokie && <NavBar />}
       <Routes>
-        {!authCokie ? <Route path="/" element={<Login />} /> : null}
-
+        <Route path="/" element={authCokie ? <Navigate to="/dashboard" /> : <Login />} />
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees" element={<Employees />} />
-          
         </Route>
       </Routes>
     </>

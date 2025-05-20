@@ -33,7 +33,7 @@ const Login = () => {
       toast.success("Inicio de sesión exitoso");
       localStorage.setItem("authToken", data.token); // Guardar el token en localStorage
       document.cookie = `authToken=${data.token}; path=/; max-age=86400;`; // Guarda también como cookie
-      navigate("/dashboard"); // Redirigir al usuario a la página de doctores
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Error al iniciar sesión: " + error.message);
     }

@@ -21,9 +21,9 @@ const Dashboard = () => {
       };
 
       const employeesResponse = await fetch("http://localhost:4000/api/employees", { headers });
-      const brandsResponse = await fetch("http://localhost:4000/api/brands", { headers });
+      /*const brandsResponse = await fetch("http://localhost:4000/api/brands", { headers });
       const modelsResponse = await fetch("http://localhost:4000/api/models", { headers });
-      const categoriesResponse = await fetch("http://localhost:4000/api/categories", { headers });
+      const categoriesResponse = await fetch("http://localhost:4000/api/categories", { headers });*/
 
       if (!employeesResponse.ok) throw new Error(`Employees API error: ${employeesResponse.status}`);
       //if (!brandsResponse.ok) throw new Error(`Brands API error: ${brandsResponse.status}`);
