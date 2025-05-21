@@ -31,7 +31,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/products", validateAuthToken(["employee", "admin"]), productRoutes);
+app.use("/api/products",  productRoutes);
 app.use("/api/clients", clientsRoutes);
 app.use("/api/employees", employeesRoutes);
 app.use("/api/branches", branchesRoutes);

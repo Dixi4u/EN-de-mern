@@ -99,7 +99,7 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink
-              to="/categories"
+              to="/products"
               className="text-decoration-none"
               style={({ isActive }) => ({
                 color: isActive ? "#00fff7" : "#b0b0b0",
@@ -109,7 +109,7 @@ const NavBar = () => {
                 letterSpacing: "1px",
               })}
             >
-              Categorías
+              Productos
             </NavLink>
           </li>
         </ul>
