@@ -8,10 +8,10 @@ const Dashboard = () => {
 
   const [data, setData] = useState({
     employees: 0,
-    brands: 0,
-    models: 0,
+    clients: 0,
+    blogs: 0/*,
     categories: 0,
-    products: 0,
+    products: 0,*/
   });
 
   const fetchData = async () => {
@@ -21,25 +21,25 @@ const Dashboard = () => {
       };
 
       const employeesResponse = await fetch("http://localhost:4000/api/employees", { headers });
-      /*const brandsResponse = await fetch("http://localhost:4000/api/brands", { headers });
-      const modelsResponse = await fetch("http://localhost:4000/api/models", { headers });
-      const categoriesResponse = await fetch("http://localhost:4000/api/categories", { headers });*/
+      const clientsResponse = await fetch("http://localhost:4000/api/clients", { headers });
+      const blogsResponse = await fetch("http://localhost:4000/api/blog", { headers });
+      /*const categoriesResponse = await fetch("http://localhost:4000/api/categories", { headers });*/
 
       if (!employeesResponse.ok) throw new Error(`Employees API error: ${employeesResponse.status}`);
-      //if (!brandsResponse.ok) throw new Error(`Brands API error: ${brandsResponse.status}`);
-     // if (!modelsResponse.ok) throw new Error(`Models API error: ${modelsResponse.status}`);
+      if (!clientsResponse.ok) throw new Error(`Clients API error: ${clientsResponse.status}`);
+      if (!blogsResponse.ok) throw new Error(`Models API error: ${blogsResponse.status}`);
       //if (!categoriesResponse.ok) throw new Error(`Categories API error: ${categoriesResponse.status}`);
 
       const employeesData = await employeesResponse.json();
-      /*const brandsData = await brandsResponse.json();
-      const modelsData = await modelsResponse.json();
-      const categoriesData = await categoriesResponse.json();
+      const clientsData = await clientsResponse.json();
+      const blogsData = await blogsResponse.json();
+      /*const categoriesData = await categoriesResponse.json();
 */
       setData({
         employees: employeesData.length,
-        /*brands: brandsData.length,
-        models: modelsData.length,
-        categories: categoriesData.length,*/
+        clients: clientsData.length,
+        blogs: blogsData.length,
+        /*categories: categoriesData.length,*/
       });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -76,10 +76,10 @@ const Dashboard = () => {
             <CardDashboard label="Empleados" data={data.employees} icon="👨‍💼" />
           </div>
           <div className="col-12 col-md-6 col-lg-3">
-            <CardDashboard label="Marcas" data={data.brands} icon="🏷️" />
+            <CardDashboard label="Clientes" data={data.clients} icon="🏷️" />
           </div>
           <div className="col-12 col-md-6 col-lg-3">
-            <CardDashboard label="Modelos" data={data.models} icon="🚗" />
+            <CardDashboard label="Blogs" data={data.blogs} icon="🚗" />
           </div>
           <div className="col-12 col-md-6 col-lg-3">
             <CardDashboard label="Categorias" data={data.categories} icon="📦" />

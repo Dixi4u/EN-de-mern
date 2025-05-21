@@ -11,8 +11,8 @@ import {
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Employees from "../pages/Employees";
-//import Brands from "../pages/Brands";
-//import Models from "../pages/Models";
+import Clients from "../pages/Clients";
+import Blogs from "../pages/Blogs";
 //import Categories from "../pages/Categories";
 import { PrivateRoute } from "./PrivateRoute";
 
@@ -56,6 +56,8 @@ function Navegation() {
         <Route path="/" element={authCokie ? <Navigate to="/dashboard" /> : <Login />} />
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/clients" element={<Clients />} />
           <Route path="/employees" element={<Employees />} />
         </Route>
       </Routes>

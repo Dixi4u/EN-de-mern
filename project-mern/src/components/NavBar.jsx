@@ -54,7 +54,7 @@ const NavBar = () => {
         <ul className="d-flex gap-4 mb-0" style={{ listStyle: "none" }}>
           <li>
             <NavLink
-              to="/models"
+              to="/blogs"
               className="text-decoration-none"
               style={({ isActive }) => ({
                 color: isActive ? "#00fff7" : "#b0b0b0",
@@ -64,12 +64,12 @@ const NavBar = () => {
                 letterSpacing: "1px",
               })}
             >
-              Modelos
+              Blogs
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/brands"
+              to="/clients"
               className="text-decoration-none"
               style={({ isActive }) => ({
                 color: isActive ? "#00fff7" : "#b0b0b0",
@@ -79,7 +79,7 @@ const NavBar = () => {
                 letterSpacing: "1px",
               })}
             >
-              Marcas
+              Clientes
             </NavLink>
           </li>
           <li>
@@ -115,8 +115,28 @@ const NavBar = () => {
         </ul>
         <div>
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={handleLogout} // o la función que uses
+            onClick={handleLogout}
+            className="fw-bold"
+            style={{
+              background: "linear-gradient(135deg, #232526 0%, #00fff7 100%)",
+              color: "#232526",
+              border: "none",
+              borderRadius: "1rem",
+              boxShadow: "0 4px 16px 0 rgba(0,255,247,0.15)",
+              textShadow: "0 0 8px #00fff7",
+              letterSpacing: "1px",
+              padding: "0.5rem 2rem",
+              transition: "transform 0.2s, box-shadow 0.2s",
+              cursor: "pointer"
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(0,255,247,0.25)";
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "0 4px 16px 0 rgba(0,255,247,0.15)";
+            }}
           >
             Cerrar Sesión
           </button>

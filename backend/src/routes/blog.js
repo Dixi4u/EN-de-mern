@@ -8,7 +8,11 @@ const router = express.Router()
 const upload = multer({dest: "public/"})
 
 router.route("/")
-.get(blogController.getAllBLog)
-.post(upload.single("image"), blogController.createBlog)
+  .get(blogController.getAllBLog)
+  .post(upload.single("image"), blogController.createBlog);
+
+router.route("/:id")
+  .put(upload.single("image"), blogController.updateBlog)
+  .delete(blogController.deleteBlog);
 
 export default router
