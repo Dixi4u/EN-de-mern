@@ -1,5 +1,5 @@
 const  clientsController = {};
-import clientsModel from "../models/Clients.js"
+import clientsModel from "../models/clients.js"
 
 //SELECT
 clientsController.getClient = async (req, res) => {
