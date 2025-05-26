@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
-import clientsModel from '../models/clients.js';
+import clientsModel from '../models/Clients.js';
 import employeesModel from '../models/Employees.js';
 import { config } from '../config.js';
 
