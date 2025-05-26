@@ -1,4 +1,4 @@
-import customersModel from "../models/clients.js";
+import customersModel from "../models/Clients.js";
 import employeesModel from "../models/Employees.js";
 import bcrypt from "bcryptjs";
 import jsonWebToken  from "jsonwebtoken";
