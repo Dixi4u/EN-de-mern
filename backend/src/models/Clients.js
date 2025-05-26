@@ -1,5 +1,6 @@
+import mongoose from "mongoose";
 
-import {Schema, model} from "mongoose";
+const { Schema, model, models } = mongoose;
 
 const clientSchema = new Schema({
     name: {
@@ -41,4 +42,7 @@ const clientSchema = new Schema({
     strict: false
 })
 
-export default model("clients", clientSchema)
+// Check if the model already exists before defining it
+const ClientModel = models.clients || model("clients", clientSchema);
+
+export default ClientModel;
