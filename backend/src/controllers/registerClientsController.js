@@ -3,7 +3,7 @@ import bcryptjs from "bcryptjs";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 
-import clientsModel from "../models/clients.js";
+import clientsModel from "../models/Clients.js";
 import { config } from "../config.js";
 
 const registerClientsController = {};
