@@ -1,0 +1,507 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api bro",
+    "description": "Esta es mi api broustoune",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/ricaldone-488/ZGasMERN/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/api/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Select a products",
+        "description": "Este método ayuda a visualizar todos los datos de la coleccion de productos",
+        "operationId": "get-api-products",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Update a products",
+        "description": "Aqui con este metodo podemos actualizar los datos de un producto",
+        "operationId": "put-api-products",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api_products_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Insert a products",
+        "description": "En este método se solicitan los datos para guardar un producto",
+        "operationId": "post-api-products",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api_products_body_1"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "name": "string",
+                    "description": "string",
+                    "price": 1,
+                    "stock": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Delete a products",
+        "description": "En este metodo podemos eliminar un producto en base al que queremos seleccionar",
+        "operationId": "delete-api-products",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/branches": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "summary": "Select a Branches",
+        "operationId": "get-api-branches",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Branches"
+        ],
+        "summary": "Update a Branches",
+        "operationId": "put-api-branches",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api_branches_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Branches"
+        ],
+        "summary": "Insert a Branches",
+        "operationId": "post-api-branches",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api_branches_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Branches"
+        ],
+        "summary": "Delete a Branches",
+        "operationId": "delete-api-branches",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/clients": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "summary": "Select a Clients",
+        "operationId": "get-api-clients",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clients"
+        ],
+        "summary": "Update a Clients",
+        "operationId": "put-api-clients",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/api_clients_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clients"
+        ],
+        "summary": "Delete a Clients",
+        "operationId": "delete-api-clients",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "products": {
+        "title": "products",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "qcz3zddfsmhpo"
+            }
+          },
+          "stock": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "z0s8kiseqv9cr"
+            }
+          }
+        }
+      },
+      "api_products_body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "p42qm8wvzkdu5"
+            }
+          },
+          "description": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "8xm2mmabvv2cg"
+            }
+          },
+          "price": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "number",
+            "x-stoplight": {
+              "id": "p6rfz9ulx5a3s"
+            }
+          },
+          "stock": {
+            "minimum": 0,
+            "type": "number",
+            "x-stoplight": {
+              "id": "pmclidng7y8qq"
+            }
+          }
+        }
+      },
+      "api_products_body_1": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zcbx68usf4dsr"
+            }
+          },
+          "description": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "012vu7zuhkg32"
+            }
+          },
+          "price": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "number",
+            "x-stoplight": {
+              "id": "ats0w3ogkhpbt"
+            }
+          },
+          "stock": {
+            "minimum": 0,
+            "type": "number",
+            "x-stoplight": {
+              "id": "3f2jujg2goz55"
+            }
+          }
+        }
+      },
+      "api_branches_body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "asgy6c40gr2uz"
+            }
+          },
+          "address": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qkfz757aeiq2o"
+            }
+          },
+          "telephone": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "o3i5uz5svm3vp"
+            }
+          },
+          "schedule": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "b9wg6dixr1w38"
+            }
+          }
+        }
+      },
+      "api_branches_body_1": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "bmcj4rv1p2zjp"
+            }
+          },
+          "address": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "4m9n4ptju8brb"
+            }
+          },
+          "telephone": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "tq3111ikee3yx"
+            }
+          },
+          "schedule": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "waj633834jjds"
+            }
+          }
+        }
+      },
+      "api_clients_body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "gemysqx29jsj4"
+            }
+          },
+          "lastName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6axvcw73lpebb"
+            }
+          },
+          "birthday": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "n5s23fdm4h4im"
+            }
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ptuq4wtn7g6hq"
+            }
+          },
+          "password": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "y3dn1f8nk5wjz"
+            }
+          },
+          "telephone": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "923mnpxzuc68e"
+            }
+          },
+          "dui": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "0ju9w5ewrwx6e"
+            }
+          },
+          "isVerified": {
+            "type": "boolean",
+            "default": true,
+            "x-stoplight": {
+              "id": "tnsbymfh8mgao"
+            }
+          }
+        }
+      }
+    }
+  }
+}
