@@ -16,6 +16,7 @@ import blogRoutes from "./src/routes/blog.js"
 import { validateAuthToken } from "./src/middlewares/validateAuthToken.js";
 import authRouter from "./src/routes/auth.js"
 import faqsRoutes from "./src/routes/faqs.js"
+import salesRoute from "./src/routes/sales.js"
 
 
 import swaggerUi from "swagger-ui-express";
@@ -63,6 +64,6 @@ app.use("/api/registerClients", registerClients)
 app.use("/api/passwordRecovery", passwordRecoveryRoutes)
 app.use("/api/blog", blogRoutes)
 app.use("/api/faqs", faqsRoutes)
-
+app.use("/api/sales", salesRoute)
 //Exporto esta constante para usar express en todos lados
 export default app;
