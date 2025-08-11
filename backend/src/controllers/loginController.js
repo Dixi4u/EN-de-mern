@@ -35,6 +35,38 @@ loginController.login = async (req, res) =>{
             return res.json({message: "User not found"})
         }
 
+        //Primer, verificamos si el usuario está bloqueado
+        if(userType !== "admin"){
+            if(userFound.lockTime > Date.now()){
+                const minutosRestantes = Math.ceil((userFound.lockTime - Date.now()) / 60000)
+                return res.status(403).json({message: "Cuenta bloqueada, faltan "+ minutosRestantes})
+            }
+        }
+
+        //Si no es administrador, validamos la contraseña
+        if(userType !== "admin"){
+            const isMatch = await bcrypt.compare(password, userFound)
+            if(!isMatch){
+                //Si se equivoca de contraseña, suma 1 a los intentos
+                userFound.loginAttempts = userFound.loginAttempts + 1
+
+                //Si sobrepasa los intentos permitidos
+                if(userFound.loginAttempts > 5){
+                    userFound.lockTime = Date.now() + 15 * 60 * 1000;
+                    await userFound.save();
+
+                    return res.status(403).json({message: "Cuenta bloqueada"})
+                }
+
+                await userFound.save();
+                return res.json({message: "Invalid password"})
+            }
+
+            userFound.loginAttempts = 0;
+            userFound.lockTime = null;
+            await userFound.save();
+        }
+
         if(userType !== "admin"){
             //Veamos si la contraseña que están escribiendo en el login es la la misma que esta en la BD(Encriptada)
             const isMatch = bcrypt.compare(password, userFound.password)
