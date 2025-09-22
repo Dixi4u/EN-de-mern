@@ -1,10 +1,10 @@
 import express from "express"
-import salesController from "../controllers/salesController"
+import salesController from "../controllers/salesController.js";
 
 const router = express.Router()
 
-router.route('/').get(salesController, get)
-router.route('/').post(salesController, post)
+router.route('/').get(salesController.getAllSales)
+router.route('/').post(salesController.insertSales)
 
 router.route('/getSalesByCategory').get(salesController.getSalesByCategory)
 router.route('/getByMostSelledProducts').get(salesController.getMostSelledProducts)
