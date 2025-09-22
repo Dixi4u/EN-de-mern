@@ -1,5 +1,5 @@
 import Sales from "../models/sales.js";
-import sales from "../models/sales.js";
+import sales from "../models/Sales.js";
 import salesModel from "../models/sales.js";
 
 //Array de funciones vacias
