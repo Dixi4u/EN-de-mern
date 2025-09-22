@@ -1,3 +1,4 @@
+import Sales from "../models/sales.js";
 import sales from "../models/sales.js";
 import salesModel from "../models/sales.js";
 
