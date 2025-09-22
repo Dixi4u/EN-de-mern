@@ -1,5 +1,3 @@
-import Sales from "../models/sales.js";
-import sales from "../models/Sales.js";
 import salesModel from "../models/sales.js";
 
 //Array de funciones vacias
@@ -8,7 +6,7 @@ const salesController = {};
 //Select
 salesController.getAllSales= async (res, req) => {
     try {
-        const sale = await salesModel.find();
+        const sales = await salesModel.find();
         res.status(200).json(sales)
     } catch (error) {
         console.log("error"+error)
