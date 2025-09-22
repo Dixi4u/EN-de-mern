@@ -1,4 +1,4 @@
-import salesModel from "../models/sales.js";
+import salesModel from "../models/Sales.js";
 
 //Array de funciones vacias
 const salesController = {};
